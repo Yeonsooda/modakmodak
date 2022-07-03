@@ -4,10 +4,21 @@
 
 <mapper namespace="userSQL">
 
-	<!-- 샘플입니다. -->
-    <select id="userCount" resultType="java.lang.Integer">
-        SELECT count(*) FROM user2
+ 	<!-- 회원정보 수정: 회원정보 불러오기 -->   	
+	<select id="getUser"  parameterType="String" resultType="UserDto">
+        SELECT * FROM user2 where user_id= #{user_id}
     </select>
-
-
+    
+    <!-- 회원정보 수정: 수정하기 --> 
+    <update id="update" parameterType="java.util.Map">
+  		update user2 set user_name = #{user_name}
+  						, user_nickname = #{user_nickname}
+  		  			    , user_email = #{user_email}
+  		  			    where user_id = #{user_id}
+  	</update>  
+  	    
+    <!-- 회원탈퇴 -->
+     <delete id="delete" parameterType="String">
+         delete user2 where user_id = #{user_id}
+     </delete>
 </mapper>
